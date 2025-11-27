@@ -14,6 +14,7 @@ import Testimonials from './pages/Testimonials';
 import About from './pages/About';
 import Profile from './pages/Profile';
 import Feedback from './pages/Feedback';
+import Thanksgiving from './pages/Thanksgiving';
 import ProtectedRoute from './components/ProtectedRoute';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { AuthProvider } from './contexts/AuthContext';
@@ -35,6 +36,7 @@ function App() {
                 <Route path="/testimonials/*" element={<Testimonials />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/feedback" element={<Feedback />} />
+                <Route path="/thanksgiving" element={<Thanksgiving />} />
                 <Route path="/admin" element={<Admin />} />
                 
                 {/* Protected Routes */}

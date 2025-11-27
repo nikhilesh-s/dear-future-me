@@ -29,6 +29,26 @@ export interface Database {
           created_at?: string
         }
       }
+      thanksgiving_gratitude: {
+        Row: {
+          id: string
+          content: string
+          delete_key?: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          content: string
+          delete_key?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          content?: string
+          delete_key?: string | null
+          created_at?: string
+        }
+      }
       letters: {
         Row: {
           id: string

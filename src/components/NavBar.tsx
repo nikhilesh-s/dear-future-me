@@ -30,6 +30,7 @@ const NavBar: React.FC = () => {
   };
 
   const publicNavItems = [
+    { to: '/thanksgiving', label: 'Thanksgiving', active: location.pathname === '/thanksgiving' },
     { to: '/survey', label: 'Pre-Survey', active: location.pathname === '/survey' },
     { to: '/explore', label: 'Explore', active: location.pathname.includes('/explore') },
     { to: '/post-survey', label: 'Post-Survey', active: location.pathname === '/post-survey' },
@@ -39,6 +40,7 @@ const NavBar: React.FC = () => {
   ];
 
   const authenticatedNavItems = [
+    { to: '/thanksgiving', label: 'Thanksgiving', active: location.pathname === '/thanksgiving' },
     { to: '/dashboard', label: 'Dashboard', active: location.pathname === '/dashboard' },
     { to: '/journal', label: 'Journal', active: location.pathname === '/journal' },
     { to: '/surveys', label: 'Surveys', active: location.pathname === '/surveys' },
