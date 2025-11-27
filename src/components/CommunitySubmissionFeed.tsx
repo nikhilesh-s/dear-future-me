@@ -13,10 +13,11 @@ interface CommunitySubmissionFeedProps {
   textareaLabel: string;
   placeholder: string;
   submitButtonLabel: string;
-  emptyState: string;
+  emptyState?: string;
   listTitle: string;
   entryNoun: string;
   icon?: React.ReactNode;
+  staticEntries?: string[];
 }
 
 interface Submission {
@@ -24,6 +25,7 @@ interface Submission {
   content: string;
   created_at: string;
   delete_key?: string | null;
+  isStatic?: boolean;
 }
 
 const CommunitySubmissionFeed: React.FC<CommunitySubmissionFeedProps> = ({
@@ -37,6 +39,7 @@ const CommunitySubmissionFeed: React.FC<CommunitySubmissionFeedProps> = ({
   listTitle,
   entryNoun,
   icon,
+  staticEntries,
 }) => {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [newSubmission, setNewSubmission] = useState('');
@@ -144,6 +147,17 @@ const CommunitySubmissionFeed: React.FC<CommunitySubmissionFeedProps> = ({
       console.error('Failed to copy text: ', err);
     }
   };
+
+  const combinedEntries: Submission[] = [
+    ...submissions,
+    ...(staticEntries?.map((entry, index) => ({
+      id: `static-${index}`,
+      content: entry,
+      created_at: '',
+      delete_key: null,
+      isStatic: true,
+    })) || []),
+  ];
 
   return (
     <div className="space-y-8">
@@ -263,19 +277,21 @@ const CommunitySubmissionFeed: React.FC<CommunitySubmissionFeedProps> = ({
       <div className="space-y-4">
         <h3 className="text-xl font-medium text-gray-800">{listTitle}</h3>
         
-        {submissions.length === 0 ? (
-          <div className="text-gray-500 italic">
-            {emptyState}
-          </div>
+        {combinedEntries.length === 0 ? (
+          emptyState ? (
+            <div className="text-gray-500 italic">
+              {emptyState}
+            </div>
+          ) : null
         ) : (
           <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {submissions.map((item) => (
+            {combinedEntries.map((item) => (
               <div 
                 key={item.id} 
                 className="bg-white rounded-lg border border-gray-200 shadow-sm p-4 hover:shadow-md transition-shadow"
               >
                 <p className="text-gray-800">{item.content}</p>
-                {item.delete_key && (
+                {item.delete_key && !item.isStatic && (
                   <div className="mt-4 pt-4 border-t border-gray-100">
                     <Button
                       variant="outline"

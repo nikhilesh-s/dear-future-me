@@ -102,7 +102,6 @@ const Thanksgiving: React.FC = () => {
         </section>
 
         <section className="space-y-6">
-          <h2 className="text-3xl font-bold text-emerald-900">Share with the community</h2>
           <CommunitySubmissionFeed
             tableName="thanksgiving_gratitude"
             title="Community Gratitude Wall"
@@ -110,23 +109,11 @@ const Thanksgiving: React.FC = () => {
             textareaLabel="Your gratitude note"
             placeholder="I'm grateful for..."
             submitButtonLabel="Share Gratitude"
-            emptyState="No gratitude notes yet. Be the first to write one!"
-            listTitle="Recent Gratitude Notes"
+            listTitle="Community Gratitude Wall"
             entryNoun="gratitude note"
             icon={<Heart className="text-emerald-500" size={24} />}
+            staticEntries={gratitudeExamples}
           />
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-3xl font-bold text-emerald-900">Gratitude sparks</h2>
-          <p className="text-gray-700">Use these community-inspired sparks to kickstart your own thank-you.</p>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {gratitudeExamples.map((example) => (
-              <div key={example} className="bg-white rounded-xl border border-emerald-100 p-4 shadow-sm">
-                <p className="text-gray-800 leading-relaxed">&ldquo;{example}&rdquo;</p>
-              </div>
-            ))}
-          </div>
         </section>
       </div>
     </div>
